@@ -1,0 +1,15 @@
+.git
+.gitignore
+README.md
+.env
+.env.*
+tmp/
+log/
+.bundle
+vendor/bundle
+node_modules/
+public/assets
+.byebug_history
+.DS_Store
+storage/*.sqlite3
+storage/*.sqlite3-*

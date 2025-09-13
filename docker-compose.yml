@@ -1,0 +1,34 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app
+      - bundle:/usr/local/bundle
+      - storage:/app/storage              # SQLiteデータベース
+      - log:/app/log                      # ログファイル
+      - uploads:/app/public/uploads       # アップロードファイル
+      - tmp:/app/tmp                      # 一時ファイル（キャッシュ等）
+    ports:
+      - "3000:3000"
+    environment:
+      - RAILS_ENV=development
+    stdin_open: true
+    tty: true
+
+  setup:
+    build: .
+    volumes:
+      - .:/app
+      - bundle:/usr/local/bundle
+    command: |
+      bash -c "rails new . --force --database=sqlite3 --skip-docker --skip-test"
+
+volumes:
+  bundle:       # gemの永続化
+  storage:      # SQLiteデータベースの永続化
+  log:          # ログの永続化
+  uploads:      # アップロードファイルの永続化
+  tmp:          # 一時ファイルの永続化（オプション）
