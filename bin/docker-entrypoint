@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+echo "Starting Rails application setup..."
+
+# データベースの作成とマイグレーション
+echo "Setting up databases..."
+bundle exec rails db:create
+bundle exec rails db:migrate
+bundle exec rails db:schema:load:cache
+bundle exec rails db:schema:load:queue  
+bundle exec rails db:schema:load:cable
+
+echo "Setup complete! Starting Rails server..."
+exec "${@}"

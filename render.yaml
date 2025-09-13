@@ -1,0 +1,21 @@
+# render.yaml
+services:
+  - type: web
+    name: rails8-sqlite-blog
+    runtime: docker
+    dockerfilePath: ./Dockerfile.prod
+    plan: free
+    autoDeploy: false
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: RAILS_LOG_TO_STDOUT
+        value: "true"
+      - key: RAILS_SERVE_STATIC_FILES
+        value: "true"
+    disk:
+      name: sqlite-storage
+      mountPath: /app/storage
+      sizeGB: 1
