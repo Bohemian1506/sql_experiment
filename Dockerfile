@@ -1,3 +1,4 @@
+# Dockerfile（更新版）
 FROM ruby:3.3.0-slim
 
 RUN apt-get update -qq && apt-get install -y \
@@ -11,6 +12,11 @@ RUN apt-get update -qq && apt-get install -y \
 
 WORKDIR /app
 
-RUN gem install rails -v "~> 8.0.0"
+# Gemfileをコピーして依存関係をインストール
+COPY Gemfile* ./
+RUN bundle install
+
+COPY . .
 
 EXPOSE 3000
+CMD ["rails", "server", "-b", "0.0.0.0"]
