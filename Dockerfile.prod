@@ -17,6 +17,8 @@ WORKDIR /app
 # 本番用の設定
 ENV RAILS_ENV=production
 ENV BUNDLE_WITHOUT=development:test
+ENV RAILS_LOG_TO_STDOUT=true
+ENV RAILS_SERVE_STATIC_FILES=true
 
 # Gemfileをコピーして依存関係をインストール
 COPY Gemfile* ./
